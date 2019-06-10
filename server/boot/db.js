@@ -12,8 +12,6 @@ function open() {
         mongoose.connect(dbConfig.host, { dbName: dbConfig.dbName }, (err, res) => {
             if (err) return reject(err);
 
-            if ()
-
             console.log(`Connection to DB is successful: ${dbConfig.host}`);
             resolve();
 
