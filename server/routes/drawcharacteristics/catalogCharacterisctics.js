@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import _ from 'lodash';
 import Catalog from '../../models/drawcharacteristics/catalogCharacteristic';
 
 /**
@@ -17,7 +18,7 @@ export function getCatalogs(req, res) {
         if (err) {
             return res.send({ error: 'Cannot read catalogs' });
         }
-        res.json({ catalog });
+        res.json({ catalog: catalog.map(item => _.pick(item, ['_id', 'name', 'type'])) });
     });
 }
 

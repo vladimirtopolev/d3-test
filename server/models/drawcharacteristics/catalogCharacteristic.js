@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -17,4 +17,4 @@ const CatalogCharacteristic = new Schema({
     items: [CatalogCharacteristicItem]
 });
 
-export default mongoose.model('CatalogCharacteristic', CatalogCharacteristic);
+module.exports = mongoose.model('CatalogCharacteristic', CatalogCharacteristic);

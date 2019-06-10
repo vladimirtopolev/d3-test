@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import CoordinatePanel from './components/CoordinatePanel';
-import CutPointsManager from './components/CutPointsManager';
-import {SUPPORTED_VOLTAGES} from './components/constants'
-import './App.css';
+import CoordinatePanel from './CoordinatePanel';
+import CutPointsManager from './CutPointsManager';
+import {SUPPORTED_VOLTAGES} from '../constants'
 
 export default () => {
 

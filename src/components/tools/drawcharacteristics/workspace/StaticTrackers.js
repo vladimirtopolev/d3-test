@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import findYatXbyBisection from "../utilities/svg/findYatXbyBisection";
+import findYatXbyBisection from "../../../../utilities/svg/findYatXbyBisection";
 
 export default class StaticTrackers extends React.Component {
 

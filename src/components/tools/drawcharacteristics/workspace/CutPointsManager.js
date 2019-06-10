@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SUPPORTED_VOLTAGES } from './constants';
+import { SUPPORTED_VOLTAGES } from '../constants';
 
 export default ({ points, addPoint, deletePoint, updatePoint }) => {
     const updateField = (point, fieldName) => {

@@ -1,6 +1,5 @@
 {
   "dbConfig": {
-    "host": "mongodb://topolev:tel5147898@app-successful-house-shard-00-00-biieu.mongodb.net:27017,app-successful-house-shard-00-01-biieu.mongodb.net:27017,app-successful-house-shard-00-02-biieu.mongodb.net:27017/test?ssl=true&replicaSet=app-successful-house-shard-0&authSource=admin&retryWrites=true",
     "dbName": "admin-panel"
   }
 }

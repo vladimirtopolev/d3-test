@@ -1,8 +1,8 @@
 import React from 'react';
 import * as d3 from 'd3';
-import findYatXbyBisection from '../utilities/svg/findYatXbyBisection'
+import findYatXbyBisection from '../../../../utilities/svg/findYatXbyBisection'
 import StaticTrackers from './StaticTrackers';
-import {SUPPORTED_VOLTAGES} from './constants'
+import {SUPPORTED_VOLTAGES} from '../constants'
 const data1 = {
     data: [
         { x: 5, y: 100 },

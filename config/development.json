@@ -1,6 +1,6 @@
 {
   "dbConfig": {
-    "host": "mongodb://localhost/admin-panel",
-    "dbName": "admin-panel"
+    "host": "mongodb://localhost/distribution-network",
+    "dbName": "distribution-network"
   }
 }

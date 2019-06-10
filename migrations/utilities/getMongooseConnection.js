@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const dbConfig = require('../../migrate-mongo-config').mongodb;
 
 
@@ -8,7 +7,6 @@ function getMongooseConnection() {
         mongoose.connect(dbConfig.url, { useNewUrlParser: true, dbName: dbConfig.databaseName }, (err, res) => {
             if (err) return reject(err);
             resolve(dbConfig);
-
         })
     })
 }

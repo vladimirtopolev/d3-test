@@ -1,12 +1,12 @@
 const async = require('async');
 
 
-const populateUsers = require('./users/populate');
+const populateDrawcharacteristics = require('./drawcharacteristics/populate');
 
 module.exports = (endCallback) => {
     return new Promise((resolve, reject) => {
         async.series([
-            cb => populateUsers(cb),
+            cb => populateDrawcharacteristics(cb),
         ], (err, res) => {
             if (endCallback) {
                 endCallback(err, res);
