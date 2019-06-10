@@ -1,0 +1,6 @@
+{
+  "dbConfig": {
+    "host": "mongodb://localhost/admin-panel",
+    "dbName": "admin-panel"
+  }
+}

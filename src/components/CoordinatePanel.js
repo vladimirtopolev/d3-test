@@ -2,6 +2,7 @@ import React from 'react';
 import * as d3 from 'd3';
 import findYatXbyBisection from '../utilities/svg/findYatXbyBisection'
 import StaticTrackers from './StaticTrackers';
+import {SUPPORTED_VOLTAGES} from './constants'
 const data1 = {
     data: [
         { x: 5, y: 100 },
@@ -35,6 +36,9 @@ export default class CoordinatePanel extends React.Component {
             maxScale: 3,
             minScale: 0.1,
             scale: 1,
+            xMin: 0.001,
+            yMin: 0.001,
+            voltage: SUPPORTED_VOLTAGES[0],
             width: 460,
             height: 460,
             margin: {
@@ -61,8 +65,13 @@ export default class CoordinatePanel extends React.Component {
     }
 
     updateWorkspace = () => {
-        this.scaleX = this.createScaleType('linear').domain([0.01, 50]).range([0, this.state.width]);
-        this.scaleY = this.createScaleType('linear').domain([100, 0.01]).range([0, this.state.height]);
+        const { scale, width, height, margin, xMin, yMin } = this.state;
+        this.scaleX = this.createScaleType('linear')
+            .domain([xMin, 50 * scale])
+            .range([0, width]);
+        this.scaleY = this.createScaleType('linear')
+            .domain([100 * scale, yMin])
+            .range([0, height]);
 
         this.buildAxises();
         this.buildLines();
@@ -144,19 +153,62 @@ export default class CoordinatePanel extends React.Component {
             });
     };
 
+    upScale = () => {
+        this.setState({
+                scale: this.state.scale + 0.1
+            },
+            () => {
+                this.updateWorkspace();
+            }
+        )
+    };
+    downScale = () => {
+        this.setState({
+                scale: this.state.scale - 0.1
+            },
+            () => {
+                this.updateWorkspace();
+            }
+        )
+    };
+
+    changeXMin = (e) => {
+        this.setState({
+            xMin: +Number(e.target.value)
+        }, () => {
+            this.updateWorkspace();
+        })
+    };
+
+    changeYMin = (e) => {
+        this.setState({
+            yMin: +Number(e.target.value)
+        }, () => {
+            this.updateWorkspace();
+        })
+    };
+
     render() {
-        const { width, height, margin, dynamicTrackerX, dynamicTrackerYs, staticTrackers, type } = this.state;
-        const {cutPoints} = this.props;
-        const workspaceProps = {width, height, margin, scaleX: this.scaleX};
+        const { width, height, margin, dynamicTrackerX, dynamicTrackerYs, staticTrackers, type, xMin, yMin, voltage } = this.state;
+        const { cutPoints } = this.props;
+        const workspaceProps = { width, height, margin, scaleX: this.scaleX };
+        console.log(voltage);
         return (
             <div>
-                <button
-                    onClick={this.toggleType}>{this.state.type === 'linear' ? 'Линейная' : 'Логарифмическая'}</button>
+                <button onClick={this.toggleType}>{type === 'linear' ? 'Линейная' : 'Логарифмическая'}</button>
+                <button onClick={this.upScale}>-</button>
+                <button onClick={this.downScale}>+</button>
+                <input type="number" value={xMin} onChange={this.changeXMin}/>
+                <input type="number" value={yMin} onChange={this.changeYMin}/>
+
+                <select value={voltage.toString()}>
+                    {SUPPORTED_VOLTAGES.map(voltage => (<option value={voltage}>{voltage}</option>))}
+                </select>
                 <svg
                     style={{ display: 'block' }}
                     ref={this.workspace}
                     width={width + margin.left + margin.right}
-                    height={height + margin.right + margin.bottom}
+                    height={height + margin.top + margin.bottom}
                     onMouseMove={this.mouseMove}>
                     <g transform={`translate(${margin.left},${margin.top})`} className="xAxis" ref={this.xAxisArea}/>
                     <g transform={`translate(${margin.left + width},${margin.top})`} className="yAxis"
@@ -168,7 +220,8 @@ export default class CoordinatePanel extends React.Component {
                             <line {...tracker} stroke="black" strokeWidth="2"/>
                         ))}
                     </g>
-                    <StaticTrackers workspace={workspaceProps} drawnLines={this.drawnLines} cutPoints={cutPoints} type={type}/>
+                    <StaticTrackers workspace={workspaceProps} drawnLines={this.drawnLines} cutPoints={cutPoints}
+                                    type={type}/>
                 </svg>
             </div>
         );
