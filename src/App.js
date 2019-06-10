@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import CoordinatePanel from './components/CoordinatePanel';
+import CutPointsManager from './components/CutPointsManager';
 import './App.css';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.workspaceRef = React.createRef();
-    }
+export default () => {
 
-    componentDidMount() {
-        this.coordinatePanel = new CoordinatePanel(this.workspaceRef.current);
-    }
+    const [points, updatePoints] = useState([]);
+    const addPoint = () => updatePoints(points.concat({ value: 0, label: '' }));
+    const deletePoint = (deletedPoint) => updatePoints(points.filter(point => deletedPoint !== point));
+    const updatePoint = (updatingPoint, key, newValue) =>
+        updatePoints(points.map(point => updatingPoint === point ? { ...point, [key]: newValue } : point));
 
-    render(){
-      return <div ref={this.workspaceRef}></div>;
-  }
+    return (
+        <div>
+            <CoordinatePanel cutPoints={points}/>
+            <CutPointsManager points={points} addPoint={addPoint} deletePoint={deletePoint} updatePoint={updatePoint}/>
+        </div>
+    );
 }
-
-export default App;
