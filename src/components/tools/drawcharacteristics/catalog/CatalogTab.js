@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {fetchCatalogSets} from '../actions'
 import UploadCatalogSetModal from './UploadCatalogSetModal';
 
-export default class CatalogTab extends React.Component {
+
+class CatalogTab extends React.Component {
     state = {
         showUploadCatalogSetModal: false,
         uploadedCatalogSets: []
@@ -13,6 +16,10 @@ export default class CatalogTab extends React.Component {
             Object.assign({}, this.state, { showUploadCatalogSetModal: !prevState.showUploadCatalogSetModal }))
     };
 
+    componentDidMount() {
+        this.props.dispatch(fetchCatalogSets(this.props.type));
+    }
+
     render() {
         return (
             <div>
@@ -22,7 +29,7 @@ export default class CatalogTab extends React.Component {
                     <UploadCatalogSetModal
                         toggle={this.toggleUploadCatalogSetModal}
                         isOpen={this.state.showUploadCatalogSetModal}
-                        catalogType={this.props.type}/>
+                        catalogSets={[]}/>
                 </div>
             </div>
         );
@@ -33,3 +40,7 @@ CatalogTab.propTypes = {
     type: PropTypes.string.isRequired
 };
 
+const mapStateToProps = (state) => {
+    return state;
+};
+export default connect(mapStateToProps)(CatalogTab);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import findYatXbyBisection from "../../../../utilities/svg/findYatXbyBisection";
 
 export default class StaticTrackers extends React.Component {

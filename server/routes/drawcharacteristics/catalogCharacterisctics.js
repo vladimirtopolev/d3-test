@@ -18,7 +18,7 @@ export function getCatalogs(req, res) {
         if (err) {
             return res.send({ error: 'Cannot read catalogs' });
         }
-        res.json({ catalog: catalog.map(item => _.pick(item, ['_id', 'name', 'type'])) });
+        res.json(catalog.map(item => _.pick(item, ['_id', 'name', 'type'])));
     });
 }
 

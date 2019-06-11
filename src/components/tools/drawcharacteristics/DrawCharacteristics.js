@@ -1,6 +1,5 @@
 import { Route, Switch, Link } from "react-router-dom";
 import CatalogSetTabs from "./catalog/CatalogSetTabs";
-import WorkspaceContainer from "./workspace/WorkspaceContainer";
 import React from "react";
 
 export default () => {
@@ -12,7 +11,6 @@ export default () => {
             </div>
             <Switch>
                 <Route path="/drawcharacteristics/catalog" component={CatalogSetTabs}/>,
-                <Route path="/drawcharacteristics/workspace" component={WorkspaceContainer}/>
             </Switch>
         </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { CHARACTERISTIC_TYPES } from '../constants';
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import CatalogTab from './CatalogTab';
 
 const { FUSE, SWITCHER } = CHARACTERISTIC_TYPES;
