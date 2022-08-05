@@ -20,7 +20,7 @@
     "lodash": "^4.17.11",
     "mongodb": "^3.2.7",
     "mongodb-migrations": "^0.8.5",
-    "mongoose": "^5.5.14",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "normalizr": "^3.4.0",
     "prop-types": "^15.7.2",
